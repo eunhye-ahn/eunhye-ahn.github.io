@@ -1,0 +1,70 @@
+---
+title:  "Interface"
+categories: java
+tag: [java]
+toc: true
+author_profile: false
+sidebar:
+    nav: "docs"
+--- 
+
+# 추상 클래스(AbstractCalss)
+추상 메서드란 바디는 정의하지 않고 선언만 하여, 자식 클래스에서 반드시 오버라이딩해야만 사용할 수 있는 메서드를 의미한다.
+```java
+public abstract class Car{
+    public void addSeat(){
+        System.out.println("시트 추가");
+    }
+    public void addNav(){
+        System.out.println("네비 추가");
+    }
+    public abstract void showAddOpiton();
+}
+```
+위 예제처럼 abstract 키워드를 사용해 추상 클래스, 메서드를 선언한다.
+추상 메서드를 사용하는 목적은 추상 메서드가 포함된 클래스를 상속받는 클래스가 반드시 추상 메서드를 구현하도록 하기 위함이다. 즉, 자식 클래스가 반드시 상속해야하는 메서드를 명시하기 위해서 추상 메서드를 사용할 수 있다.
+추상 클래스는 추상 메서드가 하나 이상 존재하는 클래스를 말하며, 앞서 말했듯이 추상 메서드는 선언부만 존재하며, 구현부는 자식 클래스에서 정의할 수 있다.
+
+# 인터페이스(Interface)
+추상 클래스가 구현부가 없는 아직 완성되지 않은 클래스라고 한다면 인터페이스는 뼈대라고 할 수 있다.
+상속은 단일 상속만 가능하여 부모 클래스를 하나만 상속받을 수 있는게 특징이다. 하지만 여러 부모 클래스의 멤버가 필요할 때가 있을 것이다. 그런 경우 다중 상속이 가능한 인터페이스를 사용할 수 있다.
+```java
+package exapmple;
+
+public interface Car {
+    public static final String name = "자동차";
+
+    public abstract void dirve();
+    public abstract void option();
+}
+```
+위 예제처럼 인터페이스에는 구현 소스를 생성할 수 없기 때문에 static, final로 생성할 수 있는 상수와 abstract 로 생성할 수 있는 추상 메서드만 가질 수 있다. 하지만 인터페이스 내 변수는 public static final을 내장하고, 내 메서드는 public abstract를 내장하고 있기 때문에 생략 가능하다.
+인터페이스는 객체가 아니기 때문에 자식클래스에서 인터페이스를 구현시켜 객체를 생성한다.
+```java
+package example;
+
+public class SportsCar implements Car{
+    @overide
+    public void dirve(){
+        System.out.println("주행을 시작합니다.");
+    }
+
+    @overide
+    public void option(){
+        System.out.println("옵션을 추가합니다.");
+    }
+}
+```
+Car 인터페이스를 implements 키워드로 구현하고 인터페이스의 추상 메서드를 모두 재정의한다.
+```java
+package example;
+
+public class Main {
+    public static void main(String[] args){
+        SportsCar sportsCar = new Car();
+
+        sportsCar.drive();
+        sportsCar.option();
+    }
+}
+```
